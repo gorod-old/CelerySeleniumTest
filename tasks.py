@@ -2,7 +2,7 @@ from celery import Celery
 
 from main import check_table_data
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
+app = Celery('tasks', broker='redis://localhost:6379/0')
 
 
 @app.task

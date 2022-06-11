@@ -1,6 +1,8 @@
 celery -A proj-name worker -l info 		-Running the Celery worker server
 celery -A proj-name status			    -celery status
 celery -A proj-name beat -l info		-Runing the Celery beat
+
+pip install flower
 celery -A proj-name flower			    -Runing the Flower (celery monitor)
 
 Redis install:
@@ -31,7 +33,7 @@ CELERYD_OPTS="--autoscale=1,1 --concurrency=1 -Q:w1 queue_name"
 
 # The name of the Celery App, should be the same as the python file
 # where the Celery tasks are defined
-CELERY_APP="app-name"
+CELERY_APP="CeleryPack.tasks"
 
 # Log and PID directories
 CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
@@ -57,7 +59,7 @@ Type=forking
 User=root
 Group=www-data
 EnvironmentFile=/etc/conf.d/celery
-WorkingDirectory=/home/user/proj-name
+WorkingDirectory=/home/user/projects/proj-name
 ExecStart=/bin/sh -c '${CELERY_BIN} -A $CELERY_APP multi start $CELERYD_NODES \
     --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} \
     --loglevel="${CELERYD_LOG_LEVEL}" $CELERYD_OPTS'
@@ -85,7 +87,7 @@ Type=simple
 User=root
 Group=www-data
 EnvironmentFile=/etc/conf.d/celery
-WorkingDirectory=/home/user/proj-name
+WorkingDirectory=/home/user/projects/proj-name
 ExecStart=/bin/sh -c '${CELERY_BIN} -A ${CELERY_APP} beat  \
     --pidfile=${CELERYBEAT_PID_FILE} \
     --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL}'

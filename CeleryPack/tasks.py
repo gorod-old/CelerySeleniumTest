@@ -15,6 +15,7 @@ app.conf.beat_schedule = {
     }
 }
 
+
 @app.task
 def run_main():
     check_table_data()

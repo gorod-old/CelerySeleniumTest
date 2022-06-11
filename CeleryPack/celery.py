@@ -4,8 +4,6 @@ from celery.schedules import crontab
 from CeleryPack import celeryconfig
 
 
-# Set the default Django settings module for the 'celery' program.
-
 app = Celery('celery', broker='redis://localhost:6379/0')
 
 # Using a string here means the worker doesn't have to serialize

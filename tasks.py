@@ -14,7 +14,6 @@ app.conf.beat_schedule = {
         'schedule': crontab(minute='*/10'),
     }
 }
-app.conf.timezone = 'UTC'
 
 @app.task
 def run_main():
